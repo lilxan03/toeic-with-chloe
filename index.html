@@ -447,6 +447,130 @@
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
+    .app-sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 80;
+        width: 256px;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-right: 1px solid #e2e8f0;
+        box-shadow: 8px 0 24px rgba(15, 23, 42, 0.08);
+        overflow-y: auto;
+        transition: width 0.2s ease, transform 0.2s ease;
+    }
+    .app-sidebar-link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.7rem 0.85rem;
+        border-radius: 0.75rem;
+        color: #475569;
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-align: left;
+    }
+    .app-sidebar-link:hover,
+    .app-sidebar-link.is-active { background: #eff6ff; color: #1d4ed8; }
+    .app-sidebar-backdrop,
+    .app-sidebar-toggle { display: none; }
+    .app-sidebar-collapse { display: inline-flex; align-items: center; justify-content: center; }
+    #start-screen > #student-banner-bg,
+    #start-screen > #student-dashboard-content {
+        width: calc(100% - 256px);
+        max-width: none;
+        margin-left: 256px;
+        margin-right: 0;
+    }
+    #editor-ui > #editor-view-bank,
+    #editor-ui > #editor-view-classes,
+    #editor-ui > #editor-view-students,
+    #editor-ui > #editor-view-payments,
+    #editor-ui > #editor-view-timetable,
+    #editor-ui > #editor-view-landing,
+    #editor-ui > #editor-view-builder { margin-left: 256px; }
+    #editor-ui > header { padding-left: calc(256px + 1.5rem); }
+    #editor-ui.sidebar-collapsed > header { padding-left: calc(76px + 1.5rem); }
+    #start-screen.sidebar-collapsed > #student-banner-bg,
+    #start-screen.sidebar-collapsed > #student-dashboard-content {
+        width: calc(100% - 76px);
+        margin-left: 76px;
+    }
+    #editor-ui.sidebar-collapsed > #editor-view-bank,
+    #editor-ui.sidebar-collapsed > #editor-view-classes,
+    #editor-ui.sidebar-collapsed > #editor-view-students,
+    #editor-ui.sidebar-collapsed > #editor-view-payments,
+    #editor-ui.sidebar-collapsed > #editor-view-timetable,
+    #editor-ui.sidebar-collapsed > #editor-view-landing,
+    #editor-ui.sidebar-collapsed > #editor-view-builder { margin-left: 76px; }
+    #start-screen.sidebar-collapsed #student-sidebar,
+    #editor-ui.sidebar-collapsed #editor-sidebar { width: 76px; }
+    #start-screen.sidebar-collapsed .sidebar-label,
+    #editor-ui.sidebar-collapsed .sidebar-label { display: none; }
+    #start-screen.sidebar-collapsed .app-sidebar-link,
+    #editor-ui.sidebar-collapsed .app-sidebar-link {
+        justify-content: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    #editor-ui.sidebar-focus #editor-sidebar,
+    #editor-ui.sidebar-focus #editor-sidebar-backdrop { display: none; }
+    #editor-ui.sidebar-focus > #editor-view-builder { margin-left: 0; }
+    #editor-ui.sidebar-focus > header { padding-left: 1.5rem; }
+    @media (max-width: 1024px) {
+        .app-sidebar {
+            width: min(280px, 84vw);
+            transform: translateX(-105%);
+            box-shadow: 16px 0 40px rgba(15, 23, 42, 0.22);
+        }
+        .app-sidebar.is-open { transform: translateX(0); }
+        .app-sidebar-backdrop.is-open {
+            display: block;
+            position: fixed;
+            inset: 0;
+            z-index: 79;
+            background: rgba(15, 23, 42, 0.45);
+        }
+        .app-sidebar-toggle { display: inline-flex; }
+        .app-sidebar-collapse { display: none; }
+        #start-screen > #student-banner-bg,
+        #start-screen > #student-dashboard-content,
+        #start-screen.sidebar-collapsed > #student-banner-bg,
+        #start-screen.sidebar-collapsed > #student-dashboard-content {
+            width: 100%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #editor-ui > #editor-view-bank,
+        #editor-ui > #editor-view-classes,
+        #editor-ui > #editor-view-students,
+        #editor-ui > #editor-view-payments,
+        #editor-ui > #editor-view-timetable,
+        #editor-ui > #editor-view-landing,
+        #editor-ui > #editor-view-builder,
+        #editor-ui.sidebar-collapsed > #editor-view-bank,
+        #editor-ui.sidebar-collapsed > #editor-view-classes,
+        #editor-ui.sidebar-collapsed > #editor-view-students,
+        #editor-ui.sidebar-collapsed > #editor-view-payments,
+        #editor-ui.sidebar-collapsed > #editor-view-timetable,
+        #editor-ui.sidebar-collapsed > #editor-view-landing,
+        #editor-ui.sidebar-collapsed > #editor-view-builder { margin-left: 0; }
+        #editor-ui > header,
+        #editor-ui.sidebar-collapsed > header { padding-left: 1.5rem; }
+        #start-screen.sidebar-collapsed #student-sidebar,
+        #editor-ui.sidebar-collapsed #editor-sidebar { width: min(280px, 84vw); }
+        #start-screen.sidebar-collapsed .sidebar-label,
+        #editor-ui.sidebar-collapsed .sidebar-label { display: inline; }
+        #start-screen.sidebar-collapsed .app-sidebar-link,
+        #editor-ui.sidebar-collapsed .app-sidebar-link {
+            justify-content: flex-start;
+            padding: 0.7rem 0.85rem;
+        }
+    }
+
     body:not(.theme-dark) {
       background-color: #fff7fa;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23e9a5b9' stroke-width='1.3' opacity='.4'%3E%3Cpath d='M34 31c-8-9-1-16 4-9 5-7 12 0 4 9-2 2-6 2-8 0zm4 1v9m-4-5h8'/%3E%3Cpath d='M135 116c-8-9-1-16 4-9 5-7 12 0 4 9-2 2-6 2-8 0zm4 1v9m-4-5h8'/%3E%3Cpath d='M54 143c-8-9-1-16 4-9 5-7 12 0 4 9-2 2-6 2-8 0zm4 1v9m-4-5h8'/%3E%3C/g%3E%3C/svg%3E");
@@ -504,6 +628,9 @@
       animation: none !important;
       transition: none !important;
       scroll-behavior: auto !important;
+    }
+    .stagger-fade-in > * {
+      opacity: 1 !important;
     }
     button:not(:disabled):active { transform: none !important; }
   </style>
@@ -1617,7 +1744,8 @@
       <header class="max-w-[1400px] mx-auto flex justify-between items-center relative z-10">
         
         <!-- LEFT SIDE: Logo, Title & Streak -->
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4">
+            <button type="button" onclick="window.toggleAppSidebar('student')" class="app-sidebar-toggle w-10 h-10 items-center justify-center rounded-xl bg-white/10 text-white border border-white/20 text-xl" aria-label="Open navigation menu" aria-expanded="false" aria-controls="student-sidebar">☰</button>
             <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-3 drop-shadow-sm">
                <div id="app-logo-student" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20 shadow-sm overflow-hidden shrink-0">🎓</div>
                <span id="app-name-student">TOEIC With Chloe</span>
@@ -1666,8 +1794,27 @@
       </header>
     </div>
 
+    <div id="student-sidebar-backdrop" class="app-sidebar-backdrop" onclick="window.closeAppSidebar('student')"></div>
+    <aside id="student-sidebar" class="app-sidebar" aria-label="Student navigation">
+      <div class="flex items-center justify-between gap-2 p-4 border-b border-slate-100">
+        <span class="sidebar-label text-xs font-black uppercase tracking-widest text-slate-400">Learning Menu</span>
+        <button type="button" class="app-sidebar-collapse text-slate-500 hover:text-blue-700 px-2 py-1 rounded-lg hover:bg-slate-100" onclick="window.toggleAppSidebar('student')" title="Collapse sidebar" aria-label="Collapse sidebar">⇤</button>
+        <button type="button" class="app-sidebar-toggle w-9 h-9 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100" onclick="window.closeAppSidebar('student')" aria-label="Close navigation menu">✕</button>
+      </div>
+      <nav class="flex flex-col gap-1 p-3">
+        <button type="button" class="app-sidebar-link" data-sidebar-item="student-dashboard" onclick="window.navigateFromSidebar('student','student/dashboard')"><span>🏠</span><span class="sidebar-label">Dashboard</span></button>
+        <button type="button" class="app-sidebar-link" data-sidebar-item="student-classes" onclick="window.navigateFromSidebar('student','student/classes')"><span>🏫</span><span class="sidebar-label">My Classes</span></button>
+        <button type="button" class="app-sidebar-link" data-sidebar-item="student-tests" onclick="window.navigateFromSidebar('student','student/tests')"><span>📝</span><span class="sidebar-label">Tests</span></button>
+        <button type="button" class="app-sidebar-link" data-sidebar-item="student-history" onclick="window.navigateFromSidebar('student','student/history')"><span>📜</span><span class="sidebar-label">Learning History</span></button>
+        <button type="button" class="app-sidebar-link" data-sidebar-item="student-flashcards" onclick="window.navigateFromSidebar('student','student/flashcards')"><span>🗂️</span><span class="sidebar-label">Flashcards</span></button>
+        <button type="button" class="app-sidebar-link" data-sidebar-item="student-leaderboard" onclick="window.navigateFromSidebar('student','student/leaderboard')"><span>🏆</span><span class="sidebar-label">Leaderboard</span></button>
+        <button type="button" class="app-sidebar-link" data-sidebar-item="student-forum" onclick="window.navigateFromSidebar('student','student/forum')"><span>💬</span><span class="sidebar-label">Class Forum</span></button>
+        <button type="button" class="app-sidebar-link" onclick="window.closeAppSidebar('student'); window.openStudentProfile()"><span>⚙️</span><span class="sidebar-label">Profile & Goals</span></button>
+      </nav>
+    </aside>
+
     <!-- Main Dashboard Container -->
-    <div class="max-w-[1400px] mx-auto -mt-20 relative z-20 px-4 lg:px-8 space-y-6 pb-20">
+    <div id="student-dashboard-content" class="max-w-[1400px] mx-auto -mt-20 relative z-20 px-4 lg:px-8 space-y-6 pb-20">
 
       <!-- TARGET GOALS WIDGET -->
       <div id="student-target-widget" class="hidden bg-white rounded-2xl p-6 shadow-sm border border-blue-100 flex-col md:flex-row justify-between items-center gap-6 overflow-hidden relative">
@@ -1858,6 +2005,50 @@
     </div>
   </div>
 
+  <div id="writing-guide-editor-modal" class="hidden fixed inset-0 bg-slate-900/70 z-[1260] flex items-center justify-center p-4">
+    <section class="bg-white rounded-2xl p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="writing-guide-editor-title">
+      <h2 id="writing-guide-editor-title" class="text-xl font-black text-slate-900">Edit writing guide</h2>
+      <p class="mt-2 text-sm text-slate-600">Saved with this test and shown read-only beside the prompt. Use a <code>## Heading</code> for each step; content is displayed as plain text.</p>
+      <textarea id="writing-guide-editor-content" class="mt-4 w-full min-h-[24rem] rounded-xl border border-slate-300 p-4 font-mono text-sm leading-relaxed outline-none focus:border-indigo-500" spellcheck="false" aria-label="Writing guide steps"></textarea>
+      <div class="mt-3 flex flex-wrap justify-between gap-2">
+        <button type="button" onclick="window.loadDefaultWritingGuide()" class="rounded-lg border border-indigo-200 px-3 py-2 text-sm font-bold text-indigo-800 hover:bg-indigo-50">Load built-in guide</button>
+        <div class="flex gap-2">
+          <button type="button" onclick="window.closeWritingGuideEditor()" class="rounded-lg border border-slate-200 px-4 py-2 text-sm font-bold text-slate-600 hover:bg-slate-50">Cancel</button>
+          <button type="button" onclick="window.saveWritingGuide()" class="rounded-lg bg-indigo-700 px-4 py-2 text-sm font-black text-white hover:bg-indigo-800">Save guide</button>
+        </div>
+      </div>
+      <p class="mt-3 text-xs text-slate-500">Leave the text empty and save to use the built-in guide again.</p>
+    </section>
+  </div>
+
+  <div id="editor-student-preview-picker" class="hidden fixed inset-0 z-[1250] bg-slate-950/60 backdrop-blur-sm items-center justify-center p-4">
+    <section class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="editor-student-preview-title">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h2 id="editor-student-preview-title" class="text-xl font-black text-slate-900">Preview as a student</h2>
+          <p class="mt-1 text-sm text-slate-600">Choose a student to preview their TOEIC dashboard and class materials.</p>
+        </div>
+        <button type="button" onclick="window.closeEditorStudentPreviewPicker()" class="text-2xl font-black text-slate-400 hover:text-slate-700" aria-label="Close student picker">&times;</button>
+      </div>
+      <label for="editor-student-preview-select" class="mt-5 block text-xs font-black uppercase tracking-wider text-slate-500">Student account</label>
+      <select id="editor-student-preview-select" class="mt-2 w-full rounded-xl border-2 border-slate-200 bg-white p-3 font-bold text-slate-800 outline-none focus:border-emerald-500"></select>
+      <p id="editor-student-preview-empty" class="hidden mt-3 rounded-lg bg-amber-50 p-3 text-sm font-semibold text-amber-900">No student accounts are loaded. Check that the editor has access to the student list, then try again.</p>
+      <p class="mt-3 text-xs text-slate-500">This is a read-only preview. Changes, reviews, and uploads will not be saved.</p>
+      <div class="mt-6 flex justify-end gap-2">
+        <button type="button" onclick="window.closeEditorStudentPreviewPicker()" class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50">Cancel</button>
+        <button type="button" id="editor-student-preview-start" onclick="window.startEditorStudentPreview()" class="rounded-xl bg-emerald-700 px-5 py-2.5 text-sm font-black text-white hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-50">Open student view</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="editor-student-preview-banner" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-[1200] w-[calc(100%-2rem)] max-w-3xl rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 shadow-2xl flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <div class="font-black text-amber-950 text-sm">Student preview · <span id="editor-student-preview-name"></span></div>
+      <div class="text-xs text-amber-800">Read-only preview · changes and uploads will not be saved.</div>
+    </div>
+    <button type="button" onclick="window.exitEditorStudentPreview()" class="rounded-xl bg-amber-700 px-4 py-2 text-sm font-black text-white hover:bg-amber-800">Return to editor</button>
+  </div>
+
   <!-- EDITOR UI -->
   <div id="editor-ui" class="hidden h-screen flex flex-col bg-[#f4f7fb] z-50 relative font-sans animate-fade-in">
     <header class="bg-blue-900 text-white px-6 py-3 flex justify-between items-center shrink-0 shadow-md min-h-[72px] transition-all relative z-40">
@@ -1869,18 +2060,13 @@
       <!-- LEFT SECTION -->
       <div class="flex items-center gap-6 flex-1 relative z-10 min-w-0">
         <!-- Default State: Logo & Tabs -->
-        <div id="editor-default-header" class="flex items-center gap-8 w-full">
+        <div id="editor-default-header" class="flex items-center gap-4 w-full">
+            <button type="button" class="app-sidebar-toggle w-10 h-10 items-center justify-center rounded-xl bg-white/10 text-white border border-white/20 text-xl" onclick="window.toggleAppSidebar('teacher')" aria-label="Open navigation menu" aria-expanded="false" aria-controls="editor-sidebar">☰</button>
             <h1 class="text-2xl font-black tracking-tight text-white flex items-center gap-2 drop-shadow-sm">
                 <div id="app-logo-teacher" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm border border-white/20 shadow-sm overflow-hidden shrink-0">🛠</div>
                 <span id="app-name-teacher">TOEIC With Chloe</span> <span class="font-light text-blue-200 text-lg">| Teacher</span>
             </h1>
-            <div class="flex bg-blue-950/40 rounded-2xl p-1.5 shadow-inner space-x-1 border border-blue-400/20" id="editor-main-tabs">
-              <button onclick="toggleEditorTab('bank')" id="tab-btn-bank" class="px-4 py-2 bg-white text-blue-900 rounded-xl text-sm font-black shadow-sm transition">Dashboard</button>
-              <button onclick="toggleEditorTab('students')" id="tab-btn-students" class="px-4 py-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl text-sm font-bold transition">Students</button>
-              <button onclick="toggleEditorTab('payments')" id="tab-btn-payments" class="px-4 py-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl text-sm font-bold transition">Payments</button>
-              <button onclick="toggleEditorTab('timetable')" id="tab-btn-timetable" class="px-4 py-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl text-sm font-bold transition">Timetable</button>
-              <button onclick="toggleEditorTab('landing')" id="tab-btn-landing" class="px-4 py-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl text-sm font-bold transition">Landing Page</button>
-            </div>
+            <div class="hidden" id="editor-main-tabs"></div>
         </div>
 
         <!-- Builder State: Back Button & Controls -->
@@ -1893,6 +2079,8 @@
                 <span id="builder-test-name" class="font-bold text-base lg:text-lg text-white truncate max-w-[120px] xl:max-w-[300px]">Editing Test...</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-300 group-hover:text-white shrink-0"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
             </button>
+            
+            <button id="editor-writing-guide-button" type="button" onclick="window.openWritingGuideEditor()" class="hidden shrink-0 px-2.5 py-1.5 rounded-lg border border-indigo-300/40 bg-indigo-500/20 text-xs font-black text-indigo-100 hover:bg-indigo-500/40">🪜 Writing Guide</button>
             
             <!-- ✨ NEW: Quick Status Toggle -->
             <select id="quick-status-toggle" onchange="window.quickUpdateTestStatus(this.value)" class="shrink-0 bg-white/10 text-white text-[11px] font-bold rounded-lg px-2 py-1.5 border border-white/20 outline-none focus:bg-white focus:text-slate-800 transition shadow-sm cursor-pointer ml-1">
@@ -1925,6 +2113,7 @@
       <!-- RIGHT SECTION -->
       <div class="flex gap-2 items-center shrink-0 relative z-10 pl-2">
         <span id="editor-autosave-status" class="text-[10px] sm:text-xs font-bold text-blue-200 opacity-0 transition-opacity w-12 sm:w-16 lg:w-20 text-right whitespace-nowrap">Autosaved</span>
+        <button type="button" id="editor-student-preview-button" onclick="window.enterEditorStudentPreview()" class="shrink-0 px-3 h-9 lg:h-10 flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition shadow-sm border border-emerald-400 font-black text-xs lg:text-sm whitespace-nowrap" title="Preview as a student">🎓 <span class="hidden sm:inline">Student Preview</span></button>
         
         <!-- Refresh Button -->
         <button onclick="window.location.reload()" class="shrink-0 w-9 h-9 lg:w-10 lg:h-10 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-xl transition shadow-sm border border-white/20 hover:-translate-y-0.5 text-base lg:text-lg" title="Refresh Page">
@@ -1978,6 +2167,24 @@
       </div>
     </header>
 
+    <div id="editor-sidebar-backdrop" class="app-sidebar-backdrop" onclick="window.closeAppSidebar('teacher')"></div>
+    <aside id="editor-sidebar" class="app-sidebar" aria-label="Teacher navigation">
+      <div class="flex items-center justify-between gap-2 p-4 border-b border-slate-100">
+        <span class="sidebar-label text-xs font-black uppercase tracking-widest text-slate-400">Workspace</span>
+        <button type="button" class="app-sidebar-collapse text-slate-500 hover:text-blue-700 px-2 py-1 rounded-lg hover:bg-slate-100" onclick="window.toggleAppSidebar('teacher')" title="Collapse sidebar" aria-label="Collapse sidebar">⇤</button>
+        <button type="button" class="app-sidebar-toggle w-9 h-9 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100" onclick="window.closeAppSidebar('teacher')" aria-label="Close navigation menu">✕</button>
+      </div>
+      <nav class="flex flex-col gap-1 p-3">
+        <button type="button" id="tab-btn-bank" class="app-sidebar-link is-active" data-sidebar-item="teacher-bank" onclick="window.navigateFromSidebar('teacher','teacher/bank/tests')"><span>📚</span><span class="sidebar-label">Test Bank</span></button>
+        <button type="button" id="sidebar-btn-classes" class="app-sidebar-link" data-sidebar-item="teacher-classes" onclick="window.navigateFromSidebar('teacher','teacher/bank/classes')"><span>👥</span><span class="sidebar-label">Classes & Subs</span></button>
+        <button type="button" id="tab-btn-students" class="app-sidebar-link" data-sidebar-item="teacher-students" onclick="window.navigateFromSidebar('teacher','teacher/students')"><span>🎓</span><span class="sidebar-label">Students</span></button>
+        <button type="button" id="tab-btn-payments" class="app-sidebar-link" data-sidebar-item="teacher-payments" onclick="window.navigateFromSidebar('teacher','teacher/payments')"><span>💳</span><span class="sidebar-label">Payments</span></button>
+        <button type="button" id="tab-btn-timetable" class="app-sidebar-link" data-sidebar-item="teacher-timetable" onclick="window.navigateFromSidebar('teacher','teacher/timetable')"><span>🗓️</span><span class="sidebar-label">Timetable</span></button>
+        <button type="button" id="tab-btn-landing" class="app-sidebar-link" data-sidebar-item="teacher-landing" onclick="window.navigateFromSidebar('teacher','teacher/landing')"><span>🌐</span><span class="sidebar-label">Landing Page</span></button>
+        <button type="button" class="app-sidebar-link" data-sidebar-item="teacher-forum" onclick="window.navigateFromSidebar('teacher','teacher/forum')"><span>💬</span><span class="sidebar-label">Class Forum</span></button>
+      </nav>
+    </aside>
+
     <div id="editor-view-bank" class="flex-1 overflow-y-auto p-6 lg:p-8 bg-[#f4f7fb] hidden animate-fade-in-up">
       <div class="max-w-7xl mx-auto pb-20">
         
@@ -2003,7 +2210,11 @@
               <h2 class="text-2xl font-black text-blue-950 tracking-tight flex items-center gap-2">
                  <span class="text-3xl">📚</span> Test Bank
               </h2>
-              <p class="text-sm text-slate-500 font-medium mt-1">Manage and assign your cloud-synced materials</p>
+              <div class="mt-1 flex flex-wrap items-center gap-3">
+                <p class="text-sm text-slate-500 font-medium">Manage and assign your cloud-synced materials</p>
+                <span id="test-bank-cloud-status" class="text-xs font-bold text-slate-500" role="status" aria-live="polite">Waiting for Firestore...</span>
+                <button type="button" onclick="window.reloadTestBankFromCloud()" class="text-xs font-bold text-blue-700 hover:text-blue-900 underline">Reload from Firestore</button>
+              </div>
             </div>
             
             <div class="grid grid-cols-3 md:grid-cols-7 gap-3">
@@ -2778,7 +2989,7 @@
     <!-- FIREBASE INITIALIZATION -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc, onSnapshot, query, where, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, getDocs, getDocsFromServer, deleteDoc, onSnapshot, query, where, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
     // ✨ NEW: Added sendPasswordResetEmail
     import { getAuth, signInAnonymously, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, updatePassword, sendPasswordResetEmail, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
@@ -2817,6 +3028,7 @@ window.initFirebaseSystem = async function() {
             window.fsGetDoc = getDoc;
             window.fsCollection = collection;
             window.fsGetDocs = getDocs;
+            window.fsGetDocsFromServer = getDocsFromServer;
             window.fsDeleteDoc = deleteDoc;
             window.fsSetDoc = (reference, ...args) => {
                 if (reference.parent?.path === 'tests') window.noteLocalTestMutation(reference.id);
@@ -5932,7 +6144,32 @@ window.initFirebaseSystem = async function() {
 
             // 2. Attach PUBLIC real-time listeners (Safe data everyone needs to see)
             await Promise.all([
-                new Promise(resolve => { window.fsOnSnapshot(window.fsCollection(window.db, window.fPath('tests')), snap => { const changes = snap.docChanges(); const testsChanged = getTestBankSignature(TEST_BANK) !== getTestBankSignature(snap.docs.map(d => d.data())); const localEchoOnly = changes.length > 0 && changes.every(change => window.isRecentLocalTestMutation(change.doc.id)); TEST_BANK = snap.docs.map(d => d.data()); changes.forEach(change => recentLocalTestWrites.delete(String(change.doc.id))); if (testsChanged && !localEchoOnly) window.triggerUIRefresh('tests'); resolve(); }); }),
+                new Promise((resolve, reject) => {
+                    let initialSnapshotReceived = false;
+                    window.fsOnSnapshot(
+                        window.fsCollection(window.db, window.fPath('tests')),
+                        snap => {
+                            const tests = snap.docs.map(testDoc => ({ ...testDoc.data(), id: testDoc.id }));
+                            const testsChanged = getTestBankSignature(TEST_BANK) !== getTestBankSignature(tests);
+                            TEST_BANK = tests;
+                            const source = snap.metadata.fromCache ? 'local cache' : 'server';
+                            updateTestBankCloudStatus(`Project ${window.firebaseApp.options.projectId} · ${snap.docs.length} test(s) from ${source}.`);
+                            snap.docChanges().forEach(change => recentLocalTestWrites.delete(String(change.doc.id)));
+                            if (testsChanged) window.triggerUIRefresh('tests');
+                            if (!initialSnapshotReceived) {
+                                initialSnapshotReceived = true;
+                                resolve();
+                            }
+                        },
+                        error => {
+                            console.error('TOEIC Firestore tests listener failed:', error);
+                            if (!initialSnapshotReceived) reject(error);
+                            else if (typeof window.showToast === 'function') {
+                                window.showToast('Could not load tests', error.message || 'Firestore denied access to the tests collection.', 'error');
+                            }
+                        }
+                    );
+                }),
                 new Promise(resolve => { window.fsOnSnapshot(window.fsCollection(window.db, window.fPath('classes')), snap => { CLASSES = snap.docs.map(d => d.data()); window.triggerUIRefresh('classes'); resolve(); }); }),
                 new Promise(resolve => { window.fsOnSnapshot(window.fsDoc(window.db, window.fPath('settings'), 'billing'), snap => { if (snap.exists()) BILLING_SETTINGS = snap.data(); resolve(); }); }),
                 new Promise(resolve => { window.fsOnSnapshot(window.fsDoc(window.db, window.fPath('settings'), 'availability'), snap => { if (snap.exists()) AVAILABILITY = snap.data(); resolve(); }); }),
@@ -6588,6 +6825,10 @@ window.initFirebaseSystem = async function() {
     };
 
     function logout() {
+      if (window.editorStudentPreviewState) {
+          window.exitEditorStudentPreview();
+          return;
+      }
       sessionStorage.removeItem('ielts_session');
       sessionStorage.removeItem('lms_pending_test_route');
       currentUser = null;
@@ -6935,6 +7176,7 @@ window.initFirebaseSystem = async function() {
 
     function openEditor() {
       document.getElementById('editor-ui').classList.remove('hidden');
+      document.getElementById('editor-student-preview-button')?.classList.toggle('hidden', currentUser?.role !== 'teacher');
 
       // ✨ ROLE RESTRICTIONS FOR COLLABORATORS
       if (currentUser.role === 'collaborator') {
@@ -6998,7 +7240,17 @@ window.initFirebaseSystem = async function() {
 
     function toggleEditorTab(tab) {
       sessionStorage.setItem('lms_teacher_tab', tab);
+      const editorRoot = document.getElementById('editor-ui');
+      if (editorRoot) editorRoot.classList.toggle('sidebar-focus', tab === 'builder');
+      if (['bank', 'classes', 'students', 'payments', 'timetable', 'landing'].includes(tab)) {
+          const target = tab === 'classes' ? 'teacher/bank/classes' : `teacher/${tab === 'bank' ? 'bank/tests' : tab}`;
+          setSidebarRoute('teacher', target);
+      }
       if (routerReady && !appRouterApplying && currentUser && ['teacher', 'collaborator'].includes(currentUser.role)) {
+          if (tab === 'bank') {
+              renderTestBank(true);
+              renderClasses();
+          }
           const view = tab === 'bank' ? (sessionStorage.getItem('lms_dash_view') || 'tests') : '';
           window.navigateAppRoute(`teacher/${tab}${view ? `/${view}` : ''}`);
           return;
@@ -7009,7 +7261,7 @@ window.initFirebaseSystem = async function() {
       });
       ['bank', 'classes', 'students', 'payments', 'timetable', 'landing'].forEach(t => {
         const b = document.getElementById(`tab-btn-${t}`);
-        if(b) b.className = t===tab ? 'px-4 py-2 bg-white text-blue-900 rounded-xl text-sm font-black shadow-sm transition' : 'px-4 py-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl text-sm font-bold transition';
+        if (b) b.className = `app-sidebar-link${t === tab ? ' is-active' : ''}`;
       });
 
       if (tab === 'builder') {
@@ -7088,6 +7340,19 @@ window.initFirebaseSystem = async function() {
 
     let currentTestBankPage = 1;
     const TESTS_PER_PAGE = 16;
+    function getTestCreatedAt(test) {
+      const createdAt = test?.createdAt;
+      if (typeof createdAt === 'number' && Number.isFinite(createdAt)) return createdAt;
+      if (createdAt && typeof createdAt.toMillis === 'function') return createdAt.toMillis();
+      if (createdAt && typeof createdAt.seconds === 'number') return createdAt.seconds * 1000;
+      if (typeof createdAt === 'string') {
+        const parsedDate = Date.parse(createdAt);
+        if (Number.isFinite(parsedDate)) return parsedDate;
+      }
+      const idTimestamp = String(test?.id || '').match(/^t_(\d{10,})/);
+      return idTimestamp ? Number(idTimestamp[1]) : 0;
+    }
+
     function getTestBankSignature(tests) {
       const normalize = value => {
         if (Array.isArray(value)) return value.map(normalize);
@@ -7102,11 +7367,59 @@ window.initFirebaseSystem = async function() {
       return JSON.stringify([...tests].sort((a, b) => String(a.id).localeCompare(String(b.id))).map(normalize));
     }
 
+    function updateTestBankCloudStatus(message, isError = false) {
+      const status = document.getElementById('test-bank-cloud-status');
+      if (!status) return;
+      status.textContent = message;
+      status.className = `text-xs font-bold ${isError ? 'text-rose-600' : 'text-slate-500'}`;
+    }
+
+    window.reloadTestBankFromCloud = async function() {
+      const button = document.querySelector('button[onclick="window.reloadTestBankFromCloud()"]');
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Loading...';
+      }
+      updateTestBankCloudStatus(`Reading project ${window.firebaseApp?.options?.projectId || 'unknown'}, database (default), collection "tests" from server...`);
+      try {
+        const snapshot = await window.fsGetDocsFromServer(window.fsCollection(window.db, window.fPath('tests')));
+        TEST_BANK = snapshot.docs.map(testDoc => ({ ...testDoc.data(), id: testDoc.id }));
+        updateTestBankCloudStatus(`Project ${window.firebaseApp.options.projectId} · database (default) returned ${TEST_BANK.length} test document(s) from server.`);
+        renderTestBank(true);
+      } catch (error) {
+        console.error('Manual TOEIC test-bank reload failed:', error);
+        updateTestBankCloudStatus(`Firestore read failed: ${error.code || error.message}`, true);
+        if (typeof window.showToast === 'function') {
+          window.showToast('Could not load tests', error.message || 'Firestore denied access to the tests collection.', 'error');
+        }
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = 'Reload from Firestore';
+        }
+      }
+    };
+
     window.changeTestBankPage = function(page) {
         currentTestBankPage = page;
         renderTestBank(false);
         // Smooth scroll back to the top of the test bank when changing pages
         document.getElementById('editor-view-bank').scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.clearTestBankFilters = function() {
+      const filters = {
+        'bank-search': '',
+        'bank-filter-mod': 'all',
+        'bank-filter-tag': 'all',
+        'bank-filter-status': 'all',
+        'bank-filter-assignee': 'all'
+      };
+      Object.entries(filters).forEach(([id, value]) => {
+        const control = document.getElementById(id);
+        if (control) control.value = value;
+      });
+      renderTestBank(true);
     };
 
     function renderTestBank(resetPage = false) {
@@ -7121,32 +7434,37 @@ window.initFirebaseSystem = async function() {
       const sort = document.getElementById('bank-sort')?.value || 'newest';
       
       const tagSelect = document.getElementById('bank-filter-tag');
-      const selectedTag = tagSelect ? tagSelect.value : 'all';
+      let selectedTag = tagSelect ? tagSelect.value : 'all';
 
       // Dynamically populate the tags dropdown based on all tests in the bank
       if (tagSelect && TEST_BANK.length > 0) {
           let allTags = new Set();
           TEST_BANK.forEach(t => {
-              if (t.topics) t.topics.forEach(tag => allTags.add(tag));
+              if (Array.isArray(t.topics)) t.topics.forEach(tag => allTags.add(tag));
           });
+          if (selectedTag !== 'all' && !allTags.has(selectedTag)) selectedTag = 'all';
           tagSelect.innerHTML = `<option value="all">All Tags</option>` + 
               Array.from(allTags).sort().map(tag => `<option value="${tag}" ${selectedTag === tag ? 'selected' : ''}>${tag}</option>`).join('');
+          tagSelect.value = selectedTag;
       }
 
       let filtered = TEST_BANK.filter(t => {
-          const matchQuery = t.title.toLowerCase().includes(query) || (t.topics && t.topics.join(' ').toLowerCase().includes(query));
+          const title = String(t.title || '');
+          const topics = Array.isArray(t.topics) ? t.topics : [];
+          const matchQuery = title.toLowerCase().includes(query) || topics.join(' ').toLowerCase().includes(query);
           const matchMod = mod === 'all' || t.module === mod;
-          const matchTag = selectedTag === 'all' || (t.topics && t.topics.includes(selectedTag));
+          const matchTag = selectedTag === 'all' || topics.includes(selectedTag);
           
           const tStatus = t.status || 'not_started';
           const matchStatus = statusFilter === 'all' || tStatus === statusFilter;
-          const matchAssignee = assigneeFilter === 'all' || (assigneeFilter === 'me' && t.assignee === currentUser.user);
+          const matchAssignee = assigneeFilter === 'all' || (assigneeFilter === 'me' && t.assignee === currentUser?.user);
           
           return matchQuery && matchMod && matchTag && matchStatus && matchAssignee;
       });
 
-      if (sort === 'az') filtered.sort((a, b) => a.title.localeCompare(b.title));
-      else if (sort === 'za') filtered.sort((a, b) => b.title.localeCompare(a.title));
+      if (sort === 'newest') filtered.sort((a, b) => getTestCreatedAt(b) - getTestCreatedAt(a));
+      else if (sort === 'az') filtered.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')));
+      else if (sort === 'za') filtered.sort((a, b) => String(b.title || '').localeCompare(String(a.title || '')));
 
       // ✨ NEW: Pagination Math
       const totalPages = Math.ceil(filtered.length / TESTS_PER_PAGE) || 1;
@@ -7159,7 +7477,7 @@ window.initFirebaseSystem = async function() {
         const modColors = { reading:'blue', listening:'cyan', writing:'emerald', speaking:'amber', activity:'fuchsia' };
         const c = modColors[t.module] || 'slate';
         
-        const assignedClasses = CLASSES.filter(cls => cls.assignedTests && cls.assignedTests.includes(t.id)).map(cls => cls.name);
+        const assignedClasses = CLASSES.filter(cls => Array.isArray(cls.assignedTests) && cls.assignedTests.includes(t.id)).map(cls => cls.name);
         const assignedBadge = assignedClasses.length > 0 
             ? `<div class="mt-1 mb-2 text-[10px] font-bold text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded truncate" title="Assigned to: ${assignedClasses.join(', ')}">📖 ${assignedClasses.join(', ')}</div>`
             : `<div class="mt-1 mb-2 text-[10px] font-bold text-slate-400 bg-slate-100 border border-slate-200 px-2 py-1 rounded">Unassigned</div>`;
@@ -7177,7 +7495,7 @@ window.initFirebaseSystem = async function() {
             'approved': { label: 'Approved', color: 'emerald' },
             'done': { label: 'Approved', color: 'emerald' } // Fallback for old data
         };
-        const st = statusMap[t.status || 'not_started'];
+        const st = statusMap[t.status || 'not_started'] || statusMap.not_started;
         const statBadge = `<span class="text-[9px] font-black px-2 py-1 rounded bg-${st.color}-50 text-${st.color}-700 border border-${st.color}-200 uppercase tracking-widest flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-${st.color}-500"></span>${st.label}</span>`;
 
         return `
@@ -7192,17 +7510,19 @@ window.initFirebaseSystem = async function() {
           </div>
           <div class="flex justify-between items-start gap-2 mb-3 flex-1">
              <h3 class="font-bold text-slate-900 leading-snug break-words">${t.title}</h3>
-             <span class="text-xs text-slate-400 font-bold shrink-0 mt-0.5">${t.parts.length} Part(s)</span>
+             <span class="text-xs text-slate-400 font-bold shrink-0 mt-0.5">${Array.isArray(t.parts) ? t.parts.length : 0} Part(s)</span>
           </div>
           <div class="shrink-0">${assignedBadge}</div>
           <div class="flex gap-2 mt-auto pt-3 border-t border-slate-100 shrink-0">
             <button onclick="editTest('${t.id}')" class="flex-1 bg-slate-100 hover:bg-slate-200 rounded py-1.5 text-base transition flex items-center justify-center shadow-sm" title="Edit Test">✏️</button>
-            ${currentUser.role === 'teacher' ? `<button onclick="window.promptAssignTest('${t.id}')" class="flex-1 bg-indigo-50 hover:bg-indigo-100 rounded py-1.5 text-base transition flex items-center justify-center shadow-sm" title="Assign to Class">👥</button>` : ''}
+            ${currentUser?.role === 'teacher' ? `<button onclick="window.promptAssignTest('${t.id}')" class="flex-1 bg-indigo-50 hover:bg-indigo-100 rounded py-1.5 text-base transition flex items-center justify-center shadow-sm" title="Assign to Class">👥</button>` : ''}
             <button onclick="window.promptMergeTest('${t.id}')" class="flex-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded py-1.5 text-base transition flex items-center justify-center shadow-sm" title="Merge Test">🔀</button>
             <button onclick="deleteTest('${t.id}')" class="flex-1 bg-rose-50 hover:bg-rose-100 rounded py-1.5 text-base transition flex items-center justify-center shadow-sm" title="Delete Test">🗑️</button>
           </div>
         </div>`;
-      }).join('') : '<div class="col-span-full text-center p-10 text-slate-500 italic bg-white rounded-2xl border border-slate-200 shadow-sm">No tests found matching your criteria.</div>';
+      }).join('') : TEST_BANK.length
+        ? '<div class="col-span-full text-center p-10 text-slate-500 bg-white rounded-2xl border border-slate-200 shadow-sm"><p class="font-bold">No tests match the current search and filters.</p><button type="button" onclick="window.clearTestBankFilters()" class="mt-3 px-4 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700">Clear search and filters</button></div>'
+        : '<div class="col-span-full text-center p-10 text-slate-500 italic bg-white rounded-2xl border border-slate-200 shadow-sm">No tests are currently loaded from the TOEIC database.</div>';
 
       // ✨ NEW: Pagination UI Generation (Dynamic Sliding Window)
       const pagCont = document.getElementById('test-bank-pagination');
@@ -7443,9 +7763,10 @@ window.initFirebaseSystem = async function() {
     }
 
     async function createNewTest(mod) {
-      showTestMetaModal(`New ${mod.charAt(0).toUpperCase()+mod.slice(1)} Test`, "", "", "", async (title, topics, diff) => {
+      showTestMetaModal(`New ${mod.charAt(0).toUpperCase()+mod.slice(1)} Test`, "", "", "", "not_started", async (title, topics, diff, status) => {
         const smartParts = getSmartIeltsStructure(mod);
-        const newTest = { id: 't_'+Date.now(), title, module: mod, topics, difficulty: diff, parts: smartParts, vocab: [], grammar: [] };
+        const createdAt = Date.now();
+        const newTest = { id: 't_'+createdAt, title, module: mod, topics, difficulty: diff, status, createdAt, parts: smartParts, vocab: [], grammar: [] };
         TEST_BANK.unshift(newTest); 
         await window.fsSetDoc(window.fsDoc(window.db, window.fPath('tests'), newTest.id), newTest);
         editTest(newTest.id);
@@ -7506,6 +7827,7 @@ window.initFirebaseSystem = async function() {
                     module: mod, 
                     topics, 
                     difficulty: diff, 
+                    createdAt: Date.now(),
                     parts: getSmartIeltsStructure(mod), 
                     vocab: [] 
                 };
@@ -8992,6 +9314,7 @@ window.initFirebaseSystem = async function() {
       editingTestId = id; APP_DATA = JSON.parse(JSON.stringify(TEST_BANK.find(t=>t.id===id)));
       if(!APP_DATA.vocab) APP_DATA.vocab = [];
       document.getElementById('builder-test-name').textContent = APP_DATA.title;
+      document.getElementById('editor-writing-guide-button')?.classList.toggle('hidden', APP_DATA.module !== 'writing');
       
       const qs = document.getElementById('quick-status-toggle');
       if (qs) qs.value = APP_DATA.status || 'not_started';
@@ -9082,7 +9405,9 @@ window.initFirebaseSystem = async function() {
     function exitBuilder() {
         sessionStorage.removeItem('lms_editing_test');
         saveCurrentEditorPart(); // Takes one final instant snapshot
+        sessionStorage.setItem('lms_dash_view', 'tests');
         toggleEditorTab('bank'); // Glides smoothly back to the dashboard
+        window.toggleDashboardView('tests');
     }
     
     function editCurrentTestMeta() {
@@ -9126,21 +9451,39 @@ window.initFirebaseSystem = async function() {
 
     async function saveActiveTest() {
       clearTimeout(editorAutosaveTimer);
-      saveCurrentEditorPart();
-      
       const btn = document.getElementById('editor-save-test');
-      btn.textContent = "Saving to Cloud..."; btn.disabled = true;
+      if (!btn) return;
+      btn.textContent = "Saving to Cloud...";
+      btn.disabled = true;
 
       try {
-          const idx = TEST_BANK.findIndex(t => t.id === editingTestId);
-          TEST_BANK[idx] = JSON.parse(JSON.stringify(APP_DATA)); 
-          await window.fsSetDoc(window.fsDoc(window.db, window.fPath('tests'), editingTestId), TEST_BANK[idx]);
-          if (typeof window.showToast === 'function') window.showToast("Saved", "Test saved to cloud database successfully.");
+          saveCurrentEditorPart();
+          const testId = String(editingTestId || APP_DATA?.id || '');
+          if (!testId || !APP_DATA) throw new Error("The active test could not be identified.");
+
+          const savedTest = JSON.parse(JSON.stringify({ ...APP_DATA, id: testId }));
+          await window.fsSetDoc(window.fsDoc(window.db, window.fPath('tests'), testId), savedTest);
+
+          const idx = TEST_BANK.findIndex(test => String(test.id) === testId);
+          if (idx === -1) TEST_BANK.unshift(savedTest);
+          else TEST_BANK[idx] = savedTest;
+
+          updateTestBankCloudStatus(`Saved successfully. ${TEST_BANK.length} test(s) loaded.`);
+          window.clearTestBankFilters();
+          sessionStorage.setItem('lms_dash_view', 'tests');
+          exitBuilder();
+          if (typeof window.showToast === 'function') window.showToast("Saved", "Test saved and shown in the Test Bank.");
       } catch (err) {
-          showModalMsg("Error", "Failed to save to cloud.");
+          console.error("Save test failed:", err);
+          if (typeof window.showToast === 'function') {
+              window.showToast("Save Failed", err?.message || "Could not save the test to the TOEIC database.", "error");
+          } else {
+              showModalMsg("Error", err?.message || "Could not save the test to the TOEIC database.");
+          }
+      } finally {
+          btn.innerHTML = "💾";
+          btn.disabled = false;
       }
-      
-      btn.innerHTML = "💾"; btn.disabled = false;
     }
 
     function previewActiveTest() {
@@ -10393,6 +10736,7 @@ window.initFirebaseSystem = async function() {
                     module: mod, 
                     topics: [], 
                     difficulty: diff, 
+                    createdAt: Date.now(),
                     parts: smartParts, 
                     vocab: [] 
                 };
@@ -13083,8 +13427,324 @@ window.renderCanvasChart = function(canvasId, config, pointColorMap, selectionCo
       return { section: 'dashboard', role: 'student' };
     }
 
+    window.toggleAppSidebar = function(role) {
+      const root = document.getElementById(role === 'teacher' ? 'editor-ui' : 'start-screen');
+      const sidebar = document.getElementById(role === 'teacher' ? 'editor-sidebar' : 'student-sidebar');
+      const backdrop = document.getElementById(role === 'teacher' ? 'editor-sidebar-backdrop' : 'student-sidebar-backdrop');
+      const toggle = root?.querySelector('.app-sidebar-toggle');
+      if (!root || !sidebar || !backdrop) return;
+      if (window.matchMedia('(max-width: 1024px)').matches) {
+        const open = !sidebar.classList.contains('is-open');
+        sidebar.classList.toggle('is-open', open);
+        backdrop.classList.toggle('is-open', open);
+        toggle?.setAttribute('aria-expanded', String(open));
+      } else {
+        const collapsed = root.classList.toggle('sidebar-collapsed');
+        const collapseButton = root.querySelector('.app-sidebar-collapse');
+        if (collapseButton) {
+          collapseButton.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
+          collapseButton.setAttribute('aria-label', collapseButton.title);
+        }
+      }
+    };
+
+    window.closeAppSidebar = function(role) {
+      const root = document.getElementById(role === 'teacher' ? 'editor-ui' : 'start-screen');
+      document.getElementById(role === 'teacher' ? 'editor-sidebar' : 'student-sidebar')?.classList.remove('is-open');
+      document.getElementById(role === 'teacher' ? 'editor-sidebar-backdrop' : 'student-sidebar-backdrop')?.classList.remove('is-open');
+      root?.querySelector('.app-sidebar-toggle')?.setAttribute('aria-expanded', 'false');
+    };
+
+    function setSidebarRoute(role, path) {
+      const parts = path.replace(/^#?\/?/, '').split('/');
+      const item = role === 'teacher'
+        ? (parts[1] === 'bank' ? (parts[2] === 'classes' ? 'teacher-classes' : 'teacher-bank') : `teacher-${parts[1]}`)
+        : `student-${parts[1] === 'review' ? 'history' : (parts[1] || 'dashboard')}`;
+      document.querySelectorAll(`#${role === 'teacher' ? 'editor-sidebar' : 'student-sidebar'} [data-sidebar-item]`).forEach(button => {
+        button.classList.toggle('is-active', button.dataset.sidebarItem === item);
+      });
+    }
+
+    window.navigateFromSidebar = function(role, path) {
+      window.navigateAppRoute(path);
+      setSidebarRoute(role, path);
+      window.closeAppSidebar(role);
+    };
+
+    window.goToAppHome = function(role) {
+      if (!currentUser) {
+        window.navigateAppRoute('landing');
+        return;
+      }
+      const isTeacher = role === 'teacher' || ['teacher', 'collaborator'].includes(currentUser?.role);
+      const targetRole = isTeacher ? 'teacher' : 'student';
+      const path = isTeacher ? 'teacher/bank/tests' : 'student/dashboard';
+      window.navigateAppRoute(path);
+      setSidebarRoute(targetRole, path);
+      window.closeAppSidebar(targetRole);
+    };
+
+    const editorStudentPreviewStorageKeys = [
+      'ielts_session', 'demo_flashcards', 'demo_submissions', 'lms_teacher_tab',
+      'lms_dash_view', 'lms_editing_test', 'lms_grading_sub', 'lms_grading_mode'
+    ];
+    const clonePreviewData = value => value === undefined ? undefined : JSON.parse(JSON.stringify(value));
+
+    window.enterEditorStudentPreview = function() {
+      if (!currentUser || !['teacher', 'collaborator'].includes(currentUser.role) || window.editorStudentPreviewState) return;
+      const students = (USERS || [])
+        .filter(user => user?.role === 'student' && typeof user.user === 'string' && user.user.trim())
+        .sort((a, b) => String(a.displayName || a.user).localeCompare(String(b.displayName || b.user)));
+      const select = document.getElementById('editor-student-preview-select');
+      const startButton = document.getElementById('editor-student-preview-start');
+      if (!select || !startButton) return;
+      const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[character]);
+      select.innerHTML = students.map(student => {
+        const label = student.displayName && student.displayName !== student.user
+          ? `${student.displayName} (${student.user})`
+          : student.user;
+        return `<option value="${escapeHtml(student.user)}">${escapeHtml(label)}</option>`;
+      }).join('');
+      select.disabled = students.length === 0;
+      startButton.disabled = students.length === 0;
+      document.getElementById('editor-student-preview-empty')?.classList.toggle('hidden', students.length > 0);
+      document.getElementById('editor-student-preview-picker')?.classList.remove('hidden');
+      document.getElementById('editor-student-preview-picker')?.classList.add('flex');
+    };
+
+    window.closeEditorStudentPreviewPicker = function() {
+      const picker = document.getElementById('editor-student-preview-picker');
+      picker?.classList.add('hidden');
+      picker?.classList.remove('flex');
+    };
+
+    window.startEditorStudentPreview = function() {
+      if (!currentUser || !['teacher', 'collaborator'].includes(currentUser.role) || window.editorStudentPreviewState) return;
+      const selectedUsername = document.getElementById('editor-student-preview-select')?.value;
+      const selectedStudent = (USERS || []).find(user => user?.role === 'student' && user.user === selectedUsername);
+      if (!selectedStudent) {
+        window.showToast?.('Student unavailable', 'Choose a student account from the loaded list.', 'error');
+        return;
+      }
+
+      const state = {
+        user: currentUser,
+        route: window.location.hash,
+        firebase: {
+          setDoc: window.fsSetDoc,
+          deleteDoc: window.fsDeleteDoc,
+          uploadMediaToStorage: window.uploadMediaToStorage,
+          upload: window.sUpload
+        },
+        globals: { USERS, CLASSES, TEST_BANK, SUBMISSIONS, ATTENDANCE, SCHEDULES, CHAT_MESSAGES, FLASHCARDS },
+        storage: Object.fromEntries(editorStudentPreviewStorageKeys.map(key => [key, sessionStorage.getItem(key)]))
+      };
+      window.editorStudentPreviewState = state;
+      try {
+        window.closeEditorStudentPreviewPicker();
+        editorStudentPreviewStorageKeys.forEach(key => sessionStorage.removeItem(key));
+        CLASSES = clonePreviewData(CLASSES || []);
+        TEST_BANK = clonePreviewData(TEST_BANK || []);
+        SUBMISSIONS = clonePreviewData(SUBMISSIONS || []);
+        ATTENDANCE = clonePreviewData(ATTENDANCE || []);
+        SCHEDULES = clonePreviewData(SCHEDULES || []);
+        CHAT_MESSAGES = clonePreviewData(CHAT_MESSAGES || []);
+        USERS = clonePreviewData(USERS || []);
+        FLASHCARDS = {};
+        currentUser = { ...clonePreviewData(selectedStudent), role: 'student', isDemo: true, isEditorPreview: true };
+        window.editorStudentPreview = true;
+        window.fsSetDoc = async () => { throw new Error('Cloud writes are disabled in student preview.'); };
+        window.fsDeleteDoc = async () => { throw new Error('Cloud deletes are disabled in student preview.'); };
+        window.uploadMediaToStorage = async () => { throw new Error('File uploads are disabled in student preview.'); };
+        window.sUpload = async () => { throw new Error('File uploads are disabled in student preview.'); };
+        const name = selectedStudent.displayName && selectedStudent.displayName !== selectedStudent.user
+          ? `${selectedStudent.displayName} (${selectedStudent.user})`
+          : selectedStudent.user;
+        document.getElementById('editor-student-preview-name').textContent = name;
+        document.getElementById('editor-student-preview-banner')?.classList.remove('hidden');
+        window.initStudentDashboard();
+        window.navigateAppRoute('student/dashboard', true);
+      } catch (error) {
+        console.error('Could not open editor student preview:', error);
+        window.exitEditorStudentPreview();
+        window.showModalMsg?.('Preview Error', error.message || 'Could not open the student preview.');
+      }
+    };
+
+    window.exitEditorStudentPreview = function() {
+      const state = window.editorStudentPreviewState;
+      if (!state) return;
+      currentUser = state.user;
+      ({ USERS, CLASSES, TEST_BANK, SUBMISSIONS, ATTENDANCE, SCHEDULES, CHAT_MESSAGES, FLASHCARDS } = state.globals);
+      window.fsSetDoc = state.firebase.setDoc;
+      window.fsDeleteDoc = state.firebase.deleteDoc;
+      window.uploadMediaToStorage = state.firebase.uploadMediaToStorage;
+      window.sUpload = state.firebase.upload;
+      window.editorStudentPreview = false;
+      window.editorStudentPreviewState = null;
+      window.closeEditorStudentPreviewPicker();
+      document.getElementById('editor-student-preview-banner')?.classList.add('hidden');
+      editorStudentPreviewStorageKeys.forEach(key => {
+        const value = state.storage[key];
+        if (value === null) sessionStorage.removeItem(key);
+        else sessionStorage.setItem(key, value);
+      });
+      window.history.replaceState({ lmsRoute: 'teacher' }, '', state.route || '#/teacher/bank/tests');
+      handleAppRouteNavigation(true);
+    };
+
+    function escapeWritingGuideText(value) {
+      return String(value ?? '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[character]);
+    }
+
+    function parseWritingGuide(value) {
+      const sections = [];
+      let current = null;
+      String(value || '').split(/\r?\n/).forEach(line => {
+        const heading = line.match(/^##\s+(.+)$/);
+        if (heading) {
+          current = { title: heading[1].trim(), body: [] };
+          sections.push(current);
+        } else if (current) current.body.push(line);
+        else if (line.trim()) {
+          current = { title: 'Writing guide', body: [line] };
+          sections.push(current);
+        }
+      });
+      return sections.filter(section => section.title || section.body.some(line => line.trim()));
+    }
+
+    function getWritingTaskType(question, taskText = '') {
+      const context = [
+        APP_DATA?.title,
+        APP_DATA?.parts?.[currentPartIdx]?.title,
+        question?.instruction,
+        question?.text,
+        taskText
+      ].filter(Boolean).join(' ').toLowerCase();
+      return /\btask\s*1\b|20\s*minutes|\b(chart|graph|table|diagram|process|map)\b/.test(context)
+        ? 'task1'
+        : 'task2';
+    }
+
+    function getDefaultWritingGuideText(taskType) {
+      if (taskType === 'task1') {
+        return `## Understand the task
+Identify what the prompt asks you to describe, the main subject, and the time period or stages. Check units and labels before writing.
+
+## Choose the overview
+Select two or three major trends, contrasts, or changes. Focus on the big picture rather than listing every detail.
+
+## Group supporting details
+Organise comparable information together. Use accurate figures and make clear comparisons between the relevant categories or periods.
+
+## Review your report
+Check that the overview highlights the main features, each figure and unit is accurate, and no unsupported opinion or explanation has been added.`;
+      }
+      return `## Decode the question
+Identify the topic and every instruction. Decide whether you need to give an opinion, discuss views, explain causes, suggest solutions, or answer several questions.
+
+## Plan your position
+Choose your main answer before drafting. Make sure your introduction and conclusion express the same clear position.
+
+## Develop focused paragraphs
+Give each body paragraph one main idea. Explain it and support it with a specific example or consequence that answers the prompt.
+
+## Draft and review
+Write a clear introduction, connected body paragraphs, and a conclusion. Check task coverage, paragraph focus, grammar, and word count.`;
+    }
+
+    window.openWritingGuideEditor = function() {
+      if (APP_DATA?.module !== 'writing') return;
+      const modal = document.getElementById('writing-guide-editor-modal');
+      const input = document.getElementById('writing-guide-editor-content');
+      if (!modal || !input) return;
+      const taskType = getWritingTaskType(null, APP_DATA.parts?.[currentEditorPartIdx]?.title || '');
+      input.value = APP_DATA.writingGuide || getDefaultWritingGuideText(taskType);
+      modal.classList.remove('hidden');
+    };
+
+    window.loadDefaultWritingGuide = function() {
+      const input = document.getElementById('writing-guide-editor-content');
+      if (!input) return;
+      const taskType = getWritingTaskType(null, APP_DATA?.parts?.[currentEditorPartIdx]?.title || '');
+      input.value = getDefaultWritingGuideText(taskType);
+    };
+
+    window.closeWritingGuideEditor = function() {
+      document.getElementById('writing-guide-editor-modal')?.classList.add('hidden');
+    };
+
+    window.saveWritingGuide = function() {
+      const input = document.getElementById('writing-guide-editor-content');
+      if (!input || !APP_DATA || APP_DATA.module !== 'writing') return;
+      APP_DATA.writingGuide = input.value.trim();
+      window.triggerEditorAutosave();
+      window.closeWritingGuideEditor();
+    };
+
+    function renderWritingGuide(question, taskType) {
+      const questionId = String(question?.ids?.[0] ?? '').replace(/[^a-zA-Z0-9_-]/g, '');
+      if (!questionId) return '';
+      const customSteps = parseWritingGuide(APP_DATA?.writingGuide);
+      const steps = customSteps.length
+        ? customSteps.map(step => ({
+            title: escapeWritingGuideText(step.title),
+            body: escapeWritingGuideText(step.body.join('\n'))
+          }))
+        : parseWritingGuide(getDefaultWritingGuideText(taskType)).map(step => ({
+            title: step.title,
+            body: step.body.join('\n')
+          }));
+      const label = taskType === 'task1' ? 'Writing Task 1' : 'Writing Task 2';
+      return `<div class="writing-guide-panel my-6 rounded-2xl border border-indigo-200 bg-indigo-50/80 p-4" data-writing-guide="${questionId}" aria-label="${label} read-only writing guide">
+        <h2 class="font-black text-indigo-950">Writing Guide</h2>
+        <p class="mt-1 text-xs font-semibold text-indigo-700">${label} · Read-only guide</p>
+        <div class="mt-4 min-h-[150px] space-y-3 text-sm leading-relaxed text-slate-700" data-guide-steps>
+          ${steps.map((step, index) => `<section data-guide-step="${index}" class="${index ? 'hidden' : ''}">
+            <h3 class="text-lg font-black text-indigo-950">${index + 1}. ${step.title}</h3>
+            <div class="mt-2 whitespace-pre-wrap">${step.body}</div>
+          </section>`).join('')}
+        </div>
+        <div class="mt-4 flex items-center justify-between gap-2 border-t border-indigo-200 pt-3">
+          <button type="button" data-guide-previous class="rounded-lg border border-indigo-200 bg-white px-3 py-2 text-sm font-bold text-indigo-800 disabled:opacity-40">← Previous</button>
+          <span data-guide-progress class="text-xs font-black text-indigo-700" aria-live="polite"></span>
+          <button type="button" data-guide-next class="rounded-lg bg-indigo-700 px-3 py-2 text-sm font-bold text-white hover:bg-indigo-800">Next →</button>
+        </div>
+      </div>`;
+    }
+
+    function wireWritingGuide(container) {
+      const guide = container.querySelector('[data-writing-guide]');
+      if (!guide) return;
+      const steps = [...guide.querySelectorAll('[data-guide-step]')];
+      const previous = guide.querySelector('[data-guide-previous]');
+      const next = guide.querySelector('[data-guide-next]');
+      const progress = guide.querySelector('[data-guide-progress]');
+      let activeStep = 0;
+      const showStep = index => {
+        activeStep = Math.max(0, Math.min(steps.length - 1, index));
+        steps.forEach((step, stepIndex) => step.classList.toggle('hidden', stepIndex !== activeStep));
+        progress.textContent = `Step ${activeStep + 1} of ${steps.length}`;
+        previous.disabled = activeStep === 0;
+        next.disabled = activeStep === steps.length - 1;
+        next.textContent = next.disabled ? 'Last step' : 'Next →';
+      };
+      previous.addEventListener('click', () => showStep(activeStep - 1));
+      next.addEventListener('click', () => showStep(activeStep + 1));
+      showStep(0);
+    }
+
     function applyAppRoute(route = normalizeAppRoute()) {
       if (route.section === 'test' || !route) return;
+      if (route.role && ['student', 'teacher'].includes(route.role)) {
+        setSidebarRoute(route.role, window.location.hash);
+        window.closeAppSidebar(route.role);
+      }
       appRouterApplying = true;
       try {
         const publicLanding = document.getElementById('public-landing-ui');
@@ -14658,10 +15318,17 @@ window.renderCanvasChart = function(canvasId, config, pointColorMap, selectionCo
               }
               return html;
           }).join('');
+
+          const guideQuestion = APP_DATA.module === 'writing' && currentUser?.role === 'student'
+              ? p.questions.find(question => question.type === 'essay')
+              : null;
+          const writingGuideHtml = guideQuestion
+              ? renderWritingGuide(guideQuestion, getWritingTaskType(guideQuestion, `${p.title || ''} ${guideQuestion.instruction || ''} ${guideQuestion.text || ''}`))
+              : '';
           
           if (!isTimeFree) {
               // ✨ FIX: Inject the titleHtml at the very top of the passage container!
-              passageContainer.innerHTML = `${titleHtml}${examPromptHtml}${media}`;
+              passageContainer.innerHTML = `${titleHtml}${examPromptHtml}${media}${writingGuideHtml}`;
           } else {
               const sampleText = (p.text || '').trim();
               let sampleAnswerBlock = '';
@@ -14681,8 +15348,9 @@ window.renderCanvasChart = function(canvasId, config, pointColorMap, selectionCo
                   </div>`;
               }
               // ✨ FIX: Inject the titleHtml here as well!
-              passageContainer.innerHTML = `${titleHtml}${examPromptHtml}${media}${sampleAnswerBlock}`;
+              passageContainer.innerHTML = `${titleHtml}${examPromptHtml}${media}${sampleAnswerBlock}${writingGuideHtml}`;
           }
+          wireWritingGuide(passageContainer);
 
           if (examAudio && examAudio.src) { examAudio.pause(); examAudio.src = ''; }
           if (listeningOverlay) { listeningOverlay.classList.add('hidden'); listeningOverlay.classList.remove('flex'); }
